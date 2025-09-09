@@ -30,6 +30,13 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
                 logger.info(f"Ответил на сообщение '{message_text}' от пользователя {update.effective_user.username or update.effective_user.first_name}")
             except Exception as e:
                 logger.error(f"Ошибка при отправке ответа: {e}")
+        elif message_text in ["нет", "Нет", "НЕТ"]:
+            try:
+                # Отвечаем именно на сообщение пользователя (reply)
+                await update.message.reply_text("Пидора ответ!")
+                logger.info(f"Ответил на сообщение '{message_text}' от пользователя {update.effective_user.username or update.effective_user.first_name}")
+            except Exception as e:
+                logger.error(f"Ошибка при отправке ответа: {e}")
 
 def main() -> None:
     """Запуск бота"""
