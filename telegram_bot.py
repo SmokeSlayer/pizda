@@ -37,6 +37,21 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
                 logger.info(f"Ответил на сообщение '{message_text}' от пользователя {update.effective_user.username or update.effective_user.first_name}")
             except Exception as e:
                 logger.error(f"Ошибка при отправке ответа: {e}")
+        else:
+            # Проверяем наличие игровых слов в сообщении (не обязательно точное совпадение)
+            game_words = ["летим", "пабг", "pubg", "парашют", "починки", "починках", "парашюты", "полетаем"]
+            message_lower = message_text.lower()
+            
+            for word in game_words:
+                if word.lower() in message_lower:
+                    try:
+                        # Отвечаем именно на сообщение пользователя (reply)
+                        await update.message.reply_text("САААМДЕЙЙЙ САНДЕЕЙ")
+                        logger.info(f"Ответил на игровое слово '{word}' в сообщении '{message_text}' от пользователя {update.effective_user.username or update.effective_user.first_name}")
+                        break  # Отвечаем только один раз, даже если найдено несколько слов
+                    except Exception as e:
+                        logger.error(f"Ошибка при отправке ответа: {e}")
+                    break
 
 def main() -> None:
     """Запуск бота"""
