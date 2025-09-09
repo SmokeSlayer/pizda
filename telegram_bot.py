@@ -10,8 +10,8 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
-# Токен бота
-BOT_TOKEN = "7114900586:AAEaqwTl3nMMmv-q7_xh6SFriY-lNnNL5EA"
+# Токен бота (получаем из переменной окружения или используем дефолтный)
+BOT_TOKEN = os.getenv('BOT_TOKEN', "7114900586:AAEaqwTl3nMMmv-q7_xh6SFriY-lNnNL5EA")
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """
@@ -34,11 +34,11 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
 def main() -> None:
     """Запуск бота"""
     # Проверяем, что токен установлен
-    if BOT_TOKEN == "YOUR_BOT_TOKEN_HERE":
+    if not BOT_TOKEN:
         print("❌ ОШИБКА: Необходимо установить токен бота!")
         print("1. Получите токен у @BotFather в Telegram")
-        print("2. Замените YOUR_BOT_TOKEN_HERE на ваш токен в файле telegram_bot.py")
-        print("3. Или установите переменную окружения BOT_TOKEN")
+        print("2. Установите переменную окружения BOT_TOKEN")
+        print("3. Или замените токен в коде")
         return
     
     # Создаем приложение
@@ -54,9 +54,4 @@ def main() -> None:
     application.run_polling(allowed_updates=Update.ALL_TYPES)
 
 if __name__ == '__main__':
-    # Можно использовать переменную окружения для токена (более безопасно)
-    token_from_env = os.getenv('BOT_TOKEN')
-    if token_from_env:
-        BOT_TOKEN = token_from_env
-    
     main()
