@@ -39,7 +39,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
                 logger.error(f"Ошибка при отправке ответа: {e}")
         else:
             # Проверяем наличие игровых слов в сообщении (не обязательно точное совпадение)
-            game_words = ["летим", "пабг", "pubg", "парашют", "починки", "починках", "парашюты", "полетаем"]
+            game_words = ["летим", "пабг", "pubg", "парашют", "починки", "починках", "парашюты", "полетаем", "лечу", "полетим", "лечу"]
             message_lower = message_text.lower()
             
             for word in game_words:
